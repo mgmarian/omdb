@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-const TopMovies = ({ top10 }) => {
+import {getPopularMovies} from "../store/movies";
+
+const TopMovies = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPopularMovies());
+  }, [dispatch]);
+
+  const top10 = useSelector((state) => state.movies);
+  console.log(top10);
+
   return (
     <div>
       <h1 className="pageTitle"> Most popular movies </h1>
