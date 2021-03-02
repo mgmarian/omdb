@@ -1,0 +1,25 @@
+body{
+    background-color: black;
+}
+.nav-bar {
+    display:flex;
+    background-color: green;
+}
+
+.nav-icon {
+    height:40px;
+    width:70px;
+}
+
+.movie-container {
+    display: grid;
+    grid-template-columns: repeat(5,13em);
+    grid-template-rows: repeat(5, 20em);
+    margin: auto;
+    background-color: black;
+
+}
+
+.description-unit {
+    color: white
+}
