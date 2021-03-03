@@ -1,24 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
-import {getPopularMovies} from "../store/movies";
+import { useSelector } from "react-redux";
 
 const TopMovies = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPopularMovies());
-  }, [dispatch]);
-
-  const top10 = useSelector((state) => state.movies);
-  console.log(top10);
+  
+  const movies = useSelector((state) => state.movies);
 
   return (
     <div>
       <h1 className="pageTitle"> Most popular movies </h1>
       <div className="movie-container">
-        {top10.map((movie) => {
+        {movies.map((movie) => {
           return (
             <div className="movie-box" key={movie.id}>
               <Link to={`/movies/${movie.id}`}>

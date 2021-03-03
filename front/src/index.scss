@@ -1,5 +1,6 @@
 body{
     background-color: black;
+    margin:auto;
 }
 .nav-bar {
     display:flex;
@@ -12,9 +13,12 @@ body{
 }
 
 .movie-container {
-    display: grid;
-    grid-template-columns: repeat(5,13em);
-    grid-template-rows: repeat(5, 20em);
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    width: 1000px;
+
     margin: auto;
     background-color: black;
 
@@ -22,4 +26,17 @@ body{
 
 .description-unit {
     color: white
+}
+
+.form-container {
+    margin: 100px auto;
+    display: flex;
+    height: 70px;
+    width: 100px;
+    background-color: white;
+}
+
+.description-unit {
+    margin: auto;
+    width: 1500px;
 }

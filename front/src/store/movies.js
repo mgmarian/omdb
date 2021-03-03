@@ -8,8 +8,14 @@ return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&l
     .then((r) => r.data.results);
 });
 
+export const getSearchMovies = createAsyncThunk ("SEARCH_MOVIES", (input) => {
+    return axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${input}&page=1&include_adult=false`)
+        .then((r) => r.data.results);
+    });
+
 const moviesReducer = createReducer([], {
-    [getPopularMovies.fulfilled]: (state, action) => action.payload 
+    [getPopularMovies.fulfilled]: (state, action) => action.payload, 
+    [getSearchMovies.fulfilled]: (state, action) => action.payload 
 })
 
 export default moviesReducer;

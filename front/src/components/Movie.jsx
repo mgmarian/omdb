@@ -6,7 +6,7 @@ const Movie = ({ movie }) => (
     <h2>{movie.title}</h2>
     <img
       className="img-unit"
-      src={`http://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+      src={`http://image.tmdb.org/t/p/w300/${movie.poster_path}`}
       alt={movie.title}
     ></img>
     <div className="description-unit">

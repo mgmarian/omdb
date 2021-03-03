@@ -2,7 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 
-const PORT = 4000;
+const routes = require('./api/routes')
+const  {db}   = require('./api/models')
+const PORT = 3000;
 
 const app = express();
 
@@ -17,10 +19,13 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
+app.use('/api', routes);
+
 app.use("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log('Listening on port: ', PORT)
-})
+db.sync({force:true})
+  .then(app.listen(PORT, () => {
+    console.log('Listening on port: ', PORT)
+  }))
