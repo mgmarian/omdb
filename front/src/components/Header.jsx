@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-import {useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {getSearchMovies} from "../store/movies"
 
@@ -18,20 +18,19 @@ const NavBar = () => {
     dispatch(getSearchMovies(input));
   }
 
-  const searchedMovies = useSelector((state) => state.movies)
-  console.log(searchedMovies)
-
   return (
-    <div className="nav-bar">
+    <div className="navbar navbar-expand-lg navbar-dark bg-primary">
       <Link to="/">
         <img className="nav-icon" src="img/omdb-logo.png" alt='icono omdb'></img>
       </Link>
-      <form onSubmit={handleSubmit}>
-      <input type="text" placeholder='Search movie' onChange= {handleChange} value={input}/> 
+      <form className='form-bar'  onSubmit={handleSubmit}>
+      <input className='search-bar form-control' type="text" placeholder='Search movie' onChange= {handleChange} value={input}/> 
       </form>
       <Link to="/auth">
-        <button>Login</button>
-        <button>Sign up</button>
+        <div >
+        <button className='btn btn-warning'>Login</button>
+        <button className='btn btn-warning'>Sign up</button>
+        </div>
       </Link>
     </div>
   );

@@ -13,6 +13,8 @@ export const getSearchMovies = createAsyncThunk ("SEARCH_MOVIES", (input) => {
         .then((r) => r.data.results);
     });
 
+    
+
 const moviesReducer = createReducer([], {
     [getPopularMovies.fulfilled]: (state, action) => action.payload, 
     [getSearchMovies.fulfilled]: (state, action) => action.payload 
