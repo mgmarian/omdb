@@ -1,9 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
 
-const Movie = ({ movie }) => {
-  const oneMovie = movie;
-  console.log(oneMovie)
+import { getIdMovie } from '../store/movies'
+
+const Movie = ({ movieId }) => {
+  const dispatch = useDispatch()
+  
+  React.useEffect(() => {
+    dispatch(getIdMovie(movieId))
+  },[dispatch])
+
+  const oneMovie = useSelector(state => state.movies)
 
   return (
     <div className="movie-unit card text-white bg-dark mb-3" >

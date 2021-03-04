@@ -25,7 +25,9 @@ app.use("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-db.sync({force:true})
+
+
+db.sync({force:false})
   .then(app.listen(PORT, () => {
     console.log('Listening on port: ', PORT)
   }))

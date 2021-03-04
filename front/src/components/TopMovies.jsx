@@ -9,7 +9,11 @@ const TopMovies = () => {
   
   React.useEffect(() => {
     dispatch(getPopularMovies());
-  }, []);
+  }, [dispatch]);
+
+  // React.useEffect(() => {
+  //   dispatch(getPopularMovies());
+  // }, [movies]);
 
   const movies = useSelector((state) => state.movies);
 
@@ -17,7 +21,7 @@ const TopMovies = () => {
     <div>
       <div className="movie-container jumbotron ">
       <h1 className="display-3"> Movies for you! </h1>
-        {movies.map((movie) => {
+        {movies.length > 0 && movies.map((movie) => {
           return (
             <div className="movie-box" key={movie.id}>
               <Link to={`/movies/${movie.id}`}>
@@ -29,6 +33,7 @@ const TopMovies = () => {
             </div>
           );
         })}
+        <Link to="/"><button className="btn btn-secondary">Atrás</button></Link>
       </div>
     </div>
   );

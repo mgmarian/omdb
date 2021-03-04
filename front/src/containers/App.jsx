@@ -3,21 +3,25 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import Header from "../components/Header";
 import TopMovies from "../components/TopMovies";
-import Auth from "../components/Auth"
-import SelectedMovie from "./SelectedMovie";
+import Register from "../components/Register"
+import Movie from "../components/Movie";
+import Users from "../components/Users";
+import Login from "../components/Login";
 
 const App = () => {
   return (
     <div>
       <Header />
       <Switch>
-        <Route exact path="/movies" render={() => <TopMovies />} />
+        <Route exact path="/" render={() => <TopMovies/>} />
         <Route
           path="/movies/:id"
-          render={({ match }) => <SelectedMovie movieId={match.params.id} />}
+          render={({ match }) => <Movie movieId={match.params.id} />}
         />
-        <Route path="/auth" render={() => <Auth />}/>
-        <Redirect from="/" to="/movies" />
+        <Route path="/login" render={() => <Login />}/>
+        <Route path="/register" render={() => <Register />}/>
+        <Route path="/users" render={() => <Users />} />
+        {/* <Redirect from="/" to="/movies" /> */}
       </Switch>
     </div>
   );
