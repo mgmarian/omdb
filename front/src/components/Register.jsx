@@ -1,9 +1,10 @@
 import React from "react";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 const Auth = () => {
   const [input, setInput] = React.useState({});
+  const history = useHistory();
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -14,8 +15,10 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {name, lastname, email, password} = input
-    axios.post(`http://localhost:3000/api/users`, {name, lastname, email, password})
-    .then(res => console.log(res))
+    axios.post(`http://localhost:3000/api/users/register`, {name, lastname, email, password})
+    .then(() =>console.log('creadoo'))
+
+    history.push("/");
     
     //dispatch(registerUser(input));
   };

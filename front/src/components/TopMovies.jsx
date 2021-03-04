@@ -33,7 +33,6 @@ const TopMovies = () => {
             </div>
           );
         })}
-        <Link to="/"><button className="btn btn-secondary">Atrás</button></Link>
       </div>
     </div>
   );

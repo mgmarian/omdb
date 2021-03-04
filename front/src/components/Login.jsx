@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [input, setInput] = React.useState({});
@@ -10,9 +11,16 @@ const Login = () => {
     setInput({ ...input, [key]: value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const {email, password} = input
+    axios.post(`http://localhost:3000/api/users/login`, {email, password})
+    .then(res => console.log(res))
+  }
+
   return (
     <div>
-      <form  className="form-container" >
+      <form  onSubmit={handleSubmit} className="form-container" >
         <fieldset>
           <legend>Please, enter your account info</legend>
           <div className="form-group">
