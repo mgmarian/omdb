@@ -1,13 +1,17 @@
 import {configureStore} from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import moviesReducer from './movies';
-import userReducer from './users'
+import usersReducer from './users';
+import loginReducer from './loginUser'
+import favoritesReducer from './favorites'
 
 const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     reducer: {
         movies: moviesReducer,
-        users: userReducer
+        users: usersReducer,
+        loginUser: loginReducer,
+        favorites: favoritesReducer
     },
 });
 

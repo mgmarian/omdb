@@ -15,8 +15,9 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {name, lastname, email, password} = input
+    //console.log(input);
     axios.post(`http://localhost:3000/api/users/register`, {name, lastname, email, password})
-    .then(() =>console.log('creadoo'))
+    .then((res) =>console.log('creadoo', res))
 
     history.push("/");
     

@@ -2,14 +2,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../store/users";
 
+
 const Users = () => {
   const dispatch = useDispatch();
+  
   React.useEffect(() => {
     dispatch(getUsers());
   }, []);
 
   const users = useSelector((state) => state.users);
-
 
 
   return (

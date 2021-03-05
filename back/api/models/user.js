@@ -31,15 +31,17 @@ User.beforeCreate((user) => {
       .genSalt(16)
       .then((salt) => {
           user.salt = salt;
-          return user.hash(user.password, user.salt);
+          return bcrypt.hashSync(user.password, user.salt);
       })
       .then((hash) => {
           user.password = hash;
       });
 });
 
-User.prototype.hash = function (password, salt) {
-  return bcrypt.hash(password, salt)
+User.prototype.validPassword = function (loginPassword) {
+  const salt = this.salt;
+  return this.password === bcrypt.hashSync(loginPassword, salt)
 }
+
 
 module.exports = User;

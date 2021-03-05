@@ -1,9 +1,18 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux'
+import {sendLoginRequest} from '../store/loginUser'
+import Error from './Error'
 
 const Login = () => {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [input, setInput] = React.useState({});
+
+  const user = useSelector(state => state.loginUser);
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -11,15 +20,19 @@ const Login = () => {
     setInput({ ...input, [key]: value });
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {email, password} = input
-    axios.post(`http://localhost:3000/api/users/login`, {email, password})
-    .then(res => console.log(res))
+    //const {email, password} = input
+    dispatch(sendLoginRequest(input))
+    //.then(res => res.data)
+    // history.push("/users");
   }
 
   return (
+    
     <div>
+     
       <form  onSubmit={handleSubmit} className="form-container" >
         <fieldset>
           <legend>Please, enter your account info</legend>
@@ -34,6 +47,7 @@ const Login = () => {
               placeholder="Enter email"
             />
           </div>
+          {user.error && user.error ? <Error/> : null}
           <div className="form-group">
             <label htmlFor="exampleInputPassword1">Password</label>
             <input

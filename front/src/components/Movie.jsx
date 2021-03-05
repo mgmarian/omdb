@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 
 import { getIdMovie } from '../store/movies'
+import { addToFavorites } from '../store/favorites'
+import  Header  from './Header'
 
 const Movie = ({ movieId }) => {
   const dispatch = useDispatch()
@@ -10,10 +12,15 @@ const Movie = ({ movieId }) => {
   React.useEffect(() => {
     dispatch(getIdMovie(movieId))
   },[dispatch])
+  
+  const handleClick = () => {
+    dispatch(addToFavorites(movieId))
+  }
 
   const oneMovie = useSelector(state => state.movies)
 
   return (
+    <>
     <div className="movie-unit card text-white bg-dark mb-3" >
       <h2 className="card-header">{oneMovie.title}</h2>
       <img
@@ -28,8 +35,10 @@ const Movie = ({ movieId }) => {
         <p>Genre:</p>
         <p>Rating : {oneMovie.vote_average} </p>
         <Link to="/"><button className="btn btn-secondary">Atrás</button></Link>
+        <button className="btn btn-secondary" onClick={handleClick}>Agregar a favoritos</button>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getSearchMovies } from "../store/movies";
+import { clearUser } from "../store/loginUser";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const [input, setInput] = useState([]);
+
+  const user = useSelector((state) => state.loginUser);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -16,6 +19,10 @@ const NavBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getSearchMovies(input));
+  };
+
+  const handleClick = () => {
+    dispatch(clearUser({}));
   };
 
   return (
@@ -38,12 +45,24 @@ const NavBar = () => {
       </form>
 
       <div>
-        <Link to="/login">
-          <button className="btn btn-warning">Login</button>
-        </Link>
-        <Link to="/register">
-          <button className="btn btn-warning">Sign up</button>
-        </Link>
+        {!user.token ? (
+          <>
+            <Link to="/login">
+              <button className="btn btn-warning">Login</button>
+            </Link>
+            <Link to="/register">
+              <button className="btn btn-warning">Sign up</button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <button onClick={handleClick} className="btn btn-warning">
+              Logout
+            </button>
+            <button className="btn btn-warning">{user.email}</button>
+          </>
+        )}
+
         <Link to="/users">
           <button className="btn btn-warning"> Usuarios registrados </button>
         </Link>
